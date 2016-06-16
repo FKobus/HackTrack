@@ -18,14 +18,16 @@ setTimeout(run, interval);
 function run() {
 	var what = (i === 0 || !!(i && !(i%2))) ? 1 : 0;
 	track_1.writeSync(what);
+	console.log('running', i, what);
 
 	if (i > 0) {
 		i--;
 		if (what == 1) {
-			setTimeout(run, interval/interval);
+			var new_interval = interval/interval;
 		} else {
-			setTimeout(run, interval);
+			var new_interval = interval;
 		}
+		setTimeout(run, new_interval);
 	} else {
 		track_1.writeSync(0);
 		console.log('OK DOEI!');
