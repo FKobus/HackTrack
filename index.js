@@ -1,14 +1,17 @@
 var Gpio = require('onoff').Gpio,
 	track_1 = new Gpio(4, 'out'),
 	i = 20,
-	interval = 1000;
+	off_interval = 1000,
+	on_interval = 10;
 
 console.log('OK HOI!');
 
 process.argv.forEach(function (val, index, array) {
   if (index == 2 && val != '') {
-  	console.log(val);
-  	interval = val;
+  	off_interval = val;
+  }
+  if (index == 3 && val != '') {
+  	on_interval = val;
   }
 });
 
@@ -22,12 +25,7 @@ function run() {
 
 	if (i > 0) {
 		i--;
-		if (what == 1) {
-			var new_interval = interval/interval;
-		} else {
-			var new_interval = interval;
-		}
-		setTimeout(run, new_interval);
+		setTimeout(run, ((what == 1) ? on_interval : off_interval));
 	} else {
 		track_1.writeSync(0);
 		console.log('OK DOEI!');
