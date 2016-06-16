@@ -15,12 +15,14 @@ setTimeout(run, interval);
 
 
 function run() {
-	var what = (i === 0 || !!(i && !(i%2))) ? 1 : 0;
+	var what = (i === 0 || !!(i && !(i%2))) ? 1 : 0,
+		new_interval = (interval/(what*1000);
 	track_1.writeSync(what);
+	console.log(what, new_interval);
 
 	if (i > 0) {
 		i--;
-		setTimeout(run, (interval/(what*100));
+		setTimeout(run, new_interval);
 	} else {
 		track_1.writeSync(0);
 		console.log('OK DOEI!');
