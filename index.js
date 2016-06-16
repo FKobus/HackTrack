@@ -16,7 +16,7 @@ setTimeout(run, interval);
 
 function run() {
 	var what = (i === 0 || !!(i && !(i%2))) ? 1 : 0,
-		new_interval = (interval/(what*1000);
+		new_interval = (interval/(what*1000));
 	track_1.writeSync(what);
 	console.log(what, new_interval);
 
