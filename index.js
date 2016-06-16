@@ -15,7 +15,7 @@ process.argv.forEach(function (val, index, array) {
   }
 });
 
-setTimeout(run, interval);
+run();
 
 
 function run() {
