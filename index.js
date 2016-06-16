@@ -1,6 +1,6 @@
 var Gpio = require('onoff').Gpio,
 	track_1 = new Gpio(4, 'out'),
-	i = 100,
+	i = 20,
 	interval = 20;
 
 console.log('OK HOI!');
@@ -15,11 +15,12 @@ setTimeout(run, interval);
 
 
 function run() {
-	track_1.writeSync((i === 0 || !!(i && !(i%2))) ? 1 : 0);
+	var what = (i === 0 || !!(i && !(i%2))) ? 1 : 0;
+	track_1.writeSync(what);
 
 	if (i > 0) {
 		i--;
-		setTimeout(run, interval);
+		setTimeout(run, (interval/(what*10));
 	} else {
 		track_1.writeSync(0);
 		console.log('OK DOEI!');
