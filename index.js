@@ -21,12 +21,12 @@ process.argv.forEach(function (val, index, array) {
 run();
 
 function run() {
-	var what = (i === 0 || !!(i && !(i%2))) ? 1 : 0,
+	var what = (laps === 0 || !!(laps && !(laps%2))) ? 1 : 0,
 		the_interval = ((what == 1) ? on_interval : off_interval);
 	track_1.writeSync(what);
-	console.log('running', i, what);
-	if (i > 0) {
-		i--;
+	console.log('running', laps, what);
+	if (laps > 0) {
+		laps--;
 		setTimeout(run, the_interval);
 	} else {
 		track_1.writeSync(0);
