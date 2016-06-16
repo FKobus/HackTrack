@@ -5,6 +5,12 @@ var Gpio = require('onoff').Gpio,
 
 console.log('OK HOI!');
 
+process.argv.forEach(function (val, index, array) {
+  if (index == 2 && val != '') {
+  	interval = val;
+  }
+});
+
 setTimeout(run, interval);
 
 
