@@ -7,6 +7,7 @@ console.log('OK HOI!');
 
 process.argv.forEach(function (val, index, array) {
   if (index == 2 && val != '') {
+  	console.log(val);
   	interval = val;
   }
 });
