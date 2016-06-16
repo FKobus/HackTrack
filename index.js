@@ -32,6 +32,7 @@ function run() {
 		setTimeout(run, the_interval);
 	} else {
 		track_1.writeSync(0);
+		track_2.writeSync(0);
 		console.log('OK DOEI!');
 	}
 }
