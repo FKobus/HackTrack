@@ -3,7 +3,7 @@ var Gpio = require('onoff').Gpio,
 	i = 1000;
 
 while(i > 0) {
-	track_1.writeSync((n === 0 || !!(n && !(n%2))) ? 1 : 0);	
+	track_1.writeSync((i === 0 || !!(i && !(i%2))) ? 1 : 0);	
 	i--;
 }
 track_1.writeSync(0);
