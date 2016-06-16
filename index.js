@@ -20,7 +20,7 @@ function run() {
 
 	if (i > 0) {
 		i--;
-		setTimeout(run, (interval/(what*10));
+		setTimeout(run, (interval/(what*100));
 	} else {
 		track_1.writeSync(0);
 		console.log('OK DOEI!');
