@@ -2,6 +2,8 @@
   "name": "HackTrack",
   "version": "0.0.1",
   "dependencies": {
-    "onoff": "1.1.1"
+    "onoff": "1.1.1",
+    "raspi-io": "6.0.1",
+    "johnny-five": "0.9.58"
   }
 }
