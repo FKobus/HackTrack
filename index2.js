@@ -5,8 +5,6 @@ var board = new five.Board({
 });
 
 board.on('ready', function() {
-  console.log('READY');
-
   var motor1 = new five.Motor({
     pins: {
       pwm: 26,
@@ -21,11 +19,10 @@ board.on('ready', function() {
     }
   });
 
-  motor1.forward(100);
-  motor2.forward(100);
-  board.wait(2000, function() {
+  motor1.forward(120);
+  motor2.forward(120);
+  board.wait(10000, function() {
     motor1.stop();
     motor2.stop();
-
   });
 });
