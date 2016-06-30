@@ -9,15 +9,15 @@ board.on('ready', function() {
 
   var motor1 = new five.Motor({
     pins: {
-      pwm: 19,
-      dir: 18
+      pwm: 32,
+      dir: 29
     }
   });
 
   var motor2 = new five.Motor({
     pins: {
-      pwm: 21,
-      dir: 22
+      pwm: 33,
+      dir: 31
     }
   });
 
