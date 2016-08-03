@@ -45,5 +45,5 @@ board.on('ready', function() {
 			response.writeHead(200, {'Content-Type': 'application/json'});
 			response.end();
 		});
-	}).listen(80);
+	}).listen(1337);
 });
