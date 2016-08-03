@@ -24,21 +24,22 @@ board.on('ready', function() {
 			// At this point, we have the headers, method, url and body, and can now
 			// do whatever we need to in order to respond to this request.
 			body = Buffer.concat(body).toString();
-			console.log(method);
-			var msg = JSON.parse(body);
-			
-			if (msg.highlight == 'accepted') {
-				var project_id = parseInt(msg.project.id);
-				if (project_id == 1435890) {
-					internet_gekkies.forward(120);
-					board.wait(interval, function() {
-						internet_gekkies.stop();
-					});
-				} else if (project_id == 1547353) {
-					unexpectables.forward(120);
-					board.wait(interval, function() {
-						unexpectables.stop();
-					});
+			if (method == 'POST') {
+				var msg = JSON.parse(body);
+				
+				if (msg.highlight == 'accepted') {
+					var project_id = parseInt(msg.project.id);
+					if (project_id == 1435890) {
+						internet_gekkies.forward(120);
+						board.wait(interval, function() {
+							internet_gekkies.stop();
+						});
+					} else if (project_id == 1547353) {
+						unexpectables.forward(120);
+						board.wait(interval, function() {
+							unexpectables.stop();
+						});
+					}
 				}
 			}
 			response.writeHead(200, {'Content-Type': 'application/json'});
