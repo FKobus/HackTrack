@@ -26,7 +26,7 @@ board.on('ready', function() {
 			console.log(body);
 		});
 		console.log("Server listening on: http://localhost:80");
-	}).listen(8080);
+	}).listen(80);
 
 	// motor1.forward(120);
 	// //motor2.forward(120);
