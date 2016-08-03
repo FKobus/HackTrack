@@ -24,6 +24,7 @@ board.on('ready', function() {
 			// At this point, we have the headers, method, url and body, and can now
 			// do whatever we need to in order to respond to this request.
 			body = Buffer.concat(body).toString();
+			console.log(method);
 			var msg = JSON.parse(body);
 			
 			if (msg.highlight == 'accepted') {
