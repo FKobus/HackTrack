@@ -6,35 +6,27 @@ var raspi = require('raspi-io'),
 	http = require('http');
 
 board.on('ready', function() {
-	var motor1 = new five.Motor({
-		pins: {
-			pwm: 26,
-			dir: 21
-		}
-	});
+	var motor1 = new five.Motor({pins:{pwm:26,dir:21}}),
+		motor2 = new five.Motor({pins:{pwm:23,dir:22}});
 
-	var motor2 = new five.Motor({
-		pins: {
-			pwm: 23,
-			dir: 22
-		}
-	});
-
-	//We need a function which handles requests and send response
-	function handleRequest(request, response) {
-		console.log(request);
-		response.end('It Works!! Path Hit: ' + request.url);
-	}
-
-	//Create a server
-	var server = http.createServer(handleRequest);
-
-	//Lets start our server
-	server.listen(80, function(){
-		//Callback triggered when server is successfully listening. Hurray!
+	http.createServer(function(request, response) {
+		var headers = request.headers,
+			method = request.method,
+			url = request.url,
+			body = [];
+		
+		request.on('error', function(err) {
+			console.error(err);
+		}).on('data', function(chunk) {
+			body.push(chunk);
+		}).on('end', function() {
+			// At this point, we have the headers, method, url and body, and can now
+			// do whatever we need to in order to respond to this request.
+			body = Buffer.concat(body).toString();
+			console.log(body);
+		});
 		console.log("Server listening on: http://localhost:80");
-	});
-
+	}).listen(8080);
 
 	// motor1.forward(120);
 	// //motor2.forward(120);
