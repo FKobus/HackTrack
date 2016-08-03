@@ -26,12 +26,8 @@ board.on('ready', function() {
 			body = Buffer.concat(body).toString();
 			var msg = JSON.parse(body);
 			
-			console.log(msg.highlight);
-
 			if (msg.highlight == 'accepted') {
 				var project_id = parseInt(msg.project.id);
-				console.log(project_id);
-				
 				if (project_id == 1435890) {
 					internet_gekkies.forward(120);
 					board.wait(interval, function() {
