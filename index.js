@@ -3,10 +3,9 @@ var five = require('johnny-five');
 var board = new five.Board({
 	io: new raspi()
 });
-var  http = require('http');
+var http = require('http');
 var interval = 9000;
 var speed = 134;
-
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
@@ -15,13 +14,15 @@ board.on('ready', function() {
 	internet_gekkies.stop();
 	unexpectables.stop();
 
+	console.log('Ready to rumble!!');
+
 	http.createServer(function(request, response) {
 		var headers = request.headers;
 		var method = request.method;
 		var url = request.url;
 		var body = [];
 
-		console.log('Ready to rumble!!');
+		
 
 		request.on('error', function(err) {
 			console.error(err);
