@@ -7,7 +7,6 @@ var  http = require('http');
 var interval = 9000;
 var speed = 134;
 
-console.log(board);
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
@@ -29,7 +28,7 @@ board.on('ready', function() {
 		}).on('data', function(chunk) {
 			body.push(chunk);
 		}).on('end', function() {
-			// At this point, we have the headers, method, url and body, an$
+			// At this point, we have the headers, method, url and body, and
 			// do whatever we need to in order to respond to this request.
 			body = Buffer.concat(body).toString();
 			if (method == 'POST') {
