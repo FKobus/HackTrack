@@ -1,11 +1,13 @@
-var raspi = require('raspi-io');
-var five = require('johnny-five');
-var board = new five.Board({
-	io: new raspi()
-});
-var http = require('http');
-var interval = 9000;
-var speed = 134;
+var raspi = require('raspi-io'),
+	five = require('johnny-five'),
+	board = new five.Board({
+		io: new raspi()
+	}),
+	http = require('http'),
+	interval = 9000,
+	speed = 134;
+
+console.log(speed, board)
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
