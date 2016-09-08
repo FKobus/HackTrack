@@ -40,7 +40,7 @@ board.on('ready', function() {
 				} else if (msg.hacktrack == true) {
 					internet_gekkies.forward(speed + 12);
 					unexpectables.forward(speed);
-					interval = (msg.interval !== undefined) ? parse$
+					interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
 					board.wait(interval, function() {
 						internet_gekkies.stop();
 						unexpectables.stop();
