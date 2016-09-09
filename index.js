@@ -1,11 +1,11 @@
-var raspi = require('raspi-io'),
-	five = require('johnny-five'),
-	board = new five.Board({
-		io: new raspi()
-	}),
-	http = require('http'),
-	interval = 3000,
-	speed = 134;
+var raspi = require('raspi-io');
+var five = require('johnny-five');
+var board = new five.Board({
+	io: new raspi()
+});
+var http = require('http');
+var interval = 3000;
+var speed = 134;
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
@@ -14,20 +14,22 @@ board.on('ready', function() {
 	internet_gekkies.stop();
 	unexpectables.stop();
 
+	console.log('Ready to rumble!!');
+
 	http.createServer(function(request, response) {
 		var headers = request.headers;
 		var method = request.method;
 		var url = request.url;
 		var body = [];
 
-		console.log('Ready to rumble!!');
+		
 
 		request.on('error', function(err) {
 			console.error(err);
 		}).on('data', function(chunk) {
 			body.push(chunk);
 		}).on('end', function() {
-			// At this point, we have the headers, method, url and body, an$
+			// At this point, we have the headers, method, url and body, and
 			// do whatever we need to in order to respond to this request.
 			body = Buffer.concat(body).toString();
 			if (method == 'POST') {
@@ -38,7 +40,7 @@ board.on('ready', function() {
 				} else if (msg.hacktrack == true) {
 					internet_gekkies.forward(speed + 12);
 					unexpectables.forward(speed);
-					interval = (msg.interval !== undefined) ? parse$
+					interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
 					board.wait(interval, function() {
 						internet_gekkies.stop();
 						unexpectables.stop();
