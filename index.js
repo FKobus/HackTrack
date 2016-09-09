@@ -38,8 +38,8 @@ board.on('ready', function() {
 					internet_gekkies.stop();
 					unexpectables.stop();
 				} else if (msg.hacktrack == true) {
-					internet_gekkies.forward(speed + 12);
-					unexpectables.forward(speed);
+					internet_gekkies.forward(speed + 8);
+					unexpectables.forward(speed + 8);
 					interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
 					board.wait(interval, function() {
 						internet_gekkies.stop();
