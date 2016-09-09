@@ -4,7 +4,7 @@ var board = new five.Board({
 	io: new raspi()
 });
 var http = require('http');
-var interval = 3000;
+var interval = 6000;
 var speed = 134;
 
 board.on('ready', function() {
