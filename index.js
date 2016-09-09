@@ -6,6 +6,7 @@ var board = new five.Board({
 var http = require('http');
 var interval = 6000;
 var speed = 134;
+var offset = 12;
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
@@ -38,9 +39,9 @@ board.on('ready', function() {
 					internet_gekkies.stop();
 					unexpectables.stop();
 				} else if (msg.hacktrack == true) {
-					internet_gekkies.forward(speed + 8);
+					internet_gekkies.forward(speed + offset);
 					setTimeout(function () {
-						unexpectables.forward(speed + 8)
+						unexpectables.forward(speed + offset)
 					}, 300)
 					interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
 					board.wait(interval, function() {
