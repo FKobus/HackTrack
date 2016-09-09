@@ -41,7 +41,7 @@ board.on('ready', function() {
 					internet_gekkies.forward(speed + 8);
 					setTimeout(function () {
 						unexpectables.forward(speed + 8)
-					}, 1000)
+					}, 300)
 					interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
 					board.wait(interval, function() {
 						internet_gekkies.stop();
