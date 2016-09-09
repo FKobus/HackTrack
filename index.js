@@ -4,7 +4,7 @@ var raspi = require('raspi-io'),
 		io: new raspi()
 	}),
 	http = require('http'),
-	interval = 9000,
+	interval = 3000,
 	speed = 134;
 
 board.on('ready', function() {
