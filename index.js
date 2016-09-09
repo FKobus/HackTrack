@@ -6,7 +6,7 @@ var board = new five.Board({
 var http = require('http');
 var interval = 6000;
 var speed = 134;
-var offset = 12;
+var offset = 16;
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
