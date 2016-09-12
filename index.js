@@ -69,8 +69,14 @@ board.on('ready', function() {
 					response.writeHead(200, {'Content-Type': 'application/json'});
 					response.end();
 				} catch (e) {
-					response.writeHead(200, {'Content-Type': 'application/json'});
-					response.end('NOOB');
+					var body = 'NOOB';
+					response.writeHead(200, {
+						'Content-Type': 'application/json',
+						'Content-Length': Buffer.byteLength(body)
+
+					});
+					response.write(body)
+					response.end();
 				}
 			}
 		});
