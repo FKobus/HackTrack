@@ -34,40 +34,45 @@ board.on('ready', function() {
 			// do whatever we need to in order to respond to this request.
 			body = Buffer.concat(body).toString();
 			if (method == 'POST') {
-				var msg = JSON.parse(body);
-				if (msg.kill == true) {
-					internet_gekkies.stop();
-					unexpectables.stop();
-				} else if (msg.hacktrack == true) {
-					internet_gekkies.forward(speed + offset);
-					// setTimeout(function () {
-					// 	unexpectables.forward(speed + offset)
-					// }, 300)
-					unexpectables.forward(speed + offset)
-					interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
-					board.wait(interval, function() {
+				try {
+					var msg = JSON.parse(body);
+					if (msg.kill == true) {
 						internet_gekkies.stop();
 						unexpectables.stop();
-					});
-				} else if (msg.highlight == 'accepted') {
-					var project_id = parseInt(msg.project.id);
-					if (project_id == 1435890) {
-						console.log('InternetGekkies!!');
-						internet_gekkies.forward(speed);
+					} else if (msg.hacktrack == true) {
+						internet_gekkies.forward(speed + offset);
+						// setTimeout(function () {
+						// 	unexpectables.forward(speed + offset)
+						// }, 300)
+						unexpectables.forward(speed + offset)
+						interval = (msg.interval !== undefined) ? parseInt(msg.interval) : 30000;
 						board.wait(interval, function() {
 							internet_gekkies.stop();
-						});
-					} else if (project_id == 1547353) {
-						console.log('Unexpectables');
-						unexpectables.forward(speed);
-						board.wait(interval, function() {
 							unexpectables.stop();
 						});
+					} else if (msg.highlight == 'accepted') {
+						var project_id = parseInt(msg.project.id);
+						if (project_id == 1435890) {
+							console.log('InternetGekkies!!');
+							internet_gekkies.forward(speed);
+							board.wait(interval, function() {
+								internet_gekkies.stop();
+							});
+						} else if (project_id == 1547353) {
+							console.log('Unexpectables');
+							unexpectables.forward(speed);
+							board.wait(interval, function() {
+								unexpectables.stop();
+							});
+						}
 					}
+					response.writeHead(200, {'Content-Type': 'application/json'});
+					response.end();
+				} catch (e) {
+					response.writeHead(200, {'Content-Type': 'application/json'});
+					response.end('NOOB');
 				}
 			}
-			response.writeHead(200, {'Content-Type': 'application/json'});
-			response.end();
 		});
 	}).listen(1337);
 });
