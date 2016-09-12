@@ -69,11 +69,10 @@ board.on('ready', function() {
 					response.writeHead(200, {'Content-Type': 'application/json'});
 					response.end();
 				} catch (e) {
-					var body = '<h1>NOOB</h1>';
 					response.writeHead(200, {
 						'Content-Type': 'text/plain'
 					});
-					response.write(body)
+					response.write('<h1>NOOB</h1>')
 					response.end();
 				}
 			}
