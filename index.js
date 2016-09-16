@@ -6,7 +6,7 @@ var board = new five.Board({
 var http = require('http');
 var interval = 6000;
 var speed = 134;
-var offset = 16;
+var offset = 0;
 
 board.on('ready', function() {
 	var internet_gekkies = new five.Motor({pins:{pwm:26,dir:21}});
@@ -23,8 +23,6 @@ board.on('ready', function() {
 		var url = request.url;
 		var body = [];
 
-		
-
 		request.on('error', function(err) {
 			console.error(err);
 		}).on('data', function(chunk) {
@@ -34,11 +32,23 @@ board.on('ready', function() {
 			// do whatever we need to in order to respond to this request.
 			body = Buffer.concat(body).toString();
 			if (method == 'POST') {
+				var msg = null;
+
+				response.writeHead(200, {
+					'Content-Type': 'text/plain'
+				});
+				// parse the body!
 				try {
-					var msg = JSON.parse(body);
+					msg = JSON.parse(body);
+				} catch (e) {
+					response.write('NOOB')
+				}
+				// valid json
+				if (msg !== null) {
 					if (msg.kill == true) {
 						internet_gekkies.stop();
 						unexpectables.stop();
+						response.write('OK')
 					} else if (msg.hacktrack == true) {
 						internet_gekkies.forward(speed + offset);
 						// setTimeout(function () {
@@ -50,6 +60,7 @@ board.on('ready', function() {
 							internet_gekkies.stop();
 							unexpectables.stop();
 						});
+						response.write('OK')
 					} else if (msg.highlight == 'accepted') {
 						var project_id = parseInt(msg.project.id);
 						if (project_id == 1435890) {
@@ -65,16 +76,12 @@ board.on('ready', function() {
 								unexpectables.stop();
 							});
 						}
+						response.write('OK')
+					} else {
+						response.write('EUH?')
 					}
-					response.writeHead(200, {'Content-Type': 'application/json'});
-					response.end();
-				} catch (e) {
-					response.writeHead(200, {
-						'Content-Type': 'text/plain'
-					});
-					response.write('<h1>NOOB</h1>')
-					response.end();
 				}
+				response.end();
 			}
 		});
 	}).listen(1337);
